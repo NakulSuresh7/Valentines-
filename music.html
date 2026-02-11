@@ -3,24 +3,34 @@
 <head>
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 
 </head>
 
 <body style="margin:0">
 
 <audio id="bgMusic" loop>
-  <source src="song.mp3?v=10" type="audio/mpeg">
+  <source src="song.mp3?v=20" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* Receive play signal */
+const music=document.getElementById("bgMusic");
+
+/* Listen for play trigger */
 window.addEventListener("message",(e)=>{
+
   if(e.data==="startMusic"){
-    document.getElementById("bgMusic").play();
+
+    /* Play only if not already playing */
+    if(!sessionStorage.getItem("musicPlaying")){
+
+      music.currentTime=0;
+      music.play();
+
+      sessionStorage.setItem("musicPlaying","true");
+    }
   }
+
 });
 
 </script>
