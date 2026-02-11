@@ -154,16 +154,30 @@ function yesClicked(){
 
 /* Moving NO button */
 function moveNo(){
-  const btn=document.getElementById("noBtn");
-  const x=Math.random()*(window.innerWidth-100);
-  const y=Math.random()*(window.innerHeight-50);
-  btn.style.position="absolute";
-  btn.style.left=x+"px";
-  btn.style.top=y+"px";
+
+  const btn = document.getElementById("noBtn");
+
+  // Screen limits
+  const maxX = window.innerWidth - btn.offsetWidth - 20;
+  const maxY = window.innerHeight - btn.offsetHeight - 20;
+
+  // Random position
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  // Apply movement
+  btn.style.position = "fixed";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  // Funny rotation
+  const rotate = Math.random() * 360;
+  btn.style.transform = `rotate(${rotate}deg)`;
 }
 
 </script>
 
 </body>
 </html>
+
 
