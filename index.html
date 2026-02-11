@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <title>Hi Baby ❤️</title>
 
+<!-- 🚫 Anti-cache -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 
 <style>
 
@@ -21,7 +24,7 @@ body{
   text-align:center;
 }
 
-/* ⭐ Same star system as memories */
+/* Stars */
 .stars{
   position:fixed;
   width:100%;
@@ -57,7 +60,6 @@ button{
   border-radius:30px;
   background:#0072ff;
   color:white;
-  cursor:pointer;
 }
 
 </style>
@@ -65,11 +67,11 @@ button{
 
 <body>
 
-<!-- 🎵 Persistent music iframe -->
-<iframe id="musicFrame" src="music.html"
+<!-- 🎵 Music iframe (cache busted) -->
+<iframe id="musicFrame"
+src="music.html?v=10"
 style="width:0;height:0;border:0;"></iframe>
 
-<!-- 🌌 Background -->
 <div class="stars"></div>
 
 <div class="shooting-star" style="top:10%; left:90%;"></div>
@@ -85,20 +87,25 @@ Every day since then…<br><br>
 You’ve made my life better.
 </p>
 
-<button onclick="startAndNext()">Next →</button>
+<button onclick="startMusicAndNext()">Next →</button>
 
 </div>
 
 <script>
 
-/* Start music + navigate */
-function startAndNext(){
+/* Start music */
+function startMusicAndNext(){
 
   const iframe=document.getElementById("musicFrame");
 
   iframe.contentWindow.postMessage("startMusic","*");
 
-  window.location.href="memories.html";
+  window.location.href="memories.html?v=10";
+}
+
+/* Force reload if cached */
+if (performance.navigation.type === 1) {
+  location.reload(true);
 }
 
 </script>
