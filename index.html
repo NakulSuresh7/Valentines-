@@ -2,26 +2,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hi Baby ❤️</title>
+<title>For My Love ❤️</title>
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
 <style>
 
+/* 🌌 GLOBAL SKY */
 body{
   margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  font-family:Poppins;
   background:#020412;
   color:white;
-  font-family:Poppins;
   overflow:hidden;
-  text-align:center;
 }
 
-/* Stars */
+/* ⭐ Stars */
 .stars{
   position:fixed;
   width:100%;
@@ -36,13 +32,14 @@ body{
   to{background-position:-10000px 5000px;}
 }
 
-/* Shooting stars */
+/* 🌠 Shooting stars */
 .shooting-star{
   position:fixed;
   width:2px;
-  height:90px;
+  height:100px;
   background:linear-gradient(-45deg,white,transparent);
   animation:shoot 6s linear infinite;
+  z-index:-1;
 }
 
 @keyframes shoot{
@@ -50,6 +47,26 @@ body{
   100%{transform:translate(-1200px,1200px) rotate(45deg);opacity:0;}
 }
 
+/* 📄 Sections */
+.section{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:1s;
+}
+
+.section.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Buttons */
 button{
   margin-top:30px;
   padding:12px 24px;
@@ -57,28 +74,109 @@ button{
   border-radius:30px;
   background:#0072ff;
   color:white;
+  cursor:pointer;
+  font-size:16px;
+}
+
+/* Timeline */
+.timeline div{
+  margin:20px 0;
+  padding:18px;
+  background:#ffffff10;
+  border-radius:14px;
+  transition:.3s;
+}
+
+.timeline div:hover{
+  transform:scale(1.05);
+  background:#ffffff25;
+  box-shadow:0 0 20px #00c6ff55;
+}
+
+/* Cards */
+.cards{
+  display:flex;
+  gap:20px;
+}
+
+.card{
+  padding:22px;
+  background:#ffffff10;
+  border-radius:16px;
+  cursor:pointer;
+  transition:.35s;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.05);
+  background:#ffffff25;
+  box-shadow:0 0 25px #00c6ff66;
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  inset:0;
+  background:#000000cc;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  visibility:hidden;
+}
+
+.popup.show{visibility:visible;}
+
+.popupContent{
+  background:#111;
+  padding:30px;
+  border-radius:16px;
+}
+
+/* Love screen */
+.loveScreen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.9);}
+  to{opacity:1;transform:scale(1);}
+}
+
+/* 💖 Hearts confetti */
+.heart{
+  position:fixed;
+  font-size:20px;
+  animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+  0%{transform:translateY(-100px);}
+  100%{transform:translateY(110vh);}
 }
 
 </style>
 </head>
 
 <body>
+
+<!-- 🎵 MUSIC -->
 <audio id="bgMusic" loop>
-<source src="song.mp3?v=30" type="audio/mpeg">
+  <source src="song.mp3?v=50" type="audio/mpeg">
 </audio>
 
-
-<!-- 🎵 Music iframe -->
-<iframe id="musicFrame"
-src="music.html?v=20"
-style="width:0;height:0;border:0;"></iframe>
-
+<!-- 🌌 SKY -->
 <div class="stars"></div>
+<div class="shooting-star" style="top:20%; left:90%;"></div>
+<div class="shooting-star" style="top:70%; left:95%; animation-delay:3s;"></div>
 
-<div class="shooting-star" style="top:10%; left:90%;"></div>
-<div class="shooting-star" style="top:60%; left:95%; animation-delay:3s;"></div>
-
-<div>
+<!-- 💌 SECTION 1 — INTRO -->
+<div class="section active" id="s1">
 
 <h1>Hi Baby ❤️</h1>
 
@@ -88,43 +186,129 @@ Every day since then…<br><br>
 You’ve made my life better.
 </p>
 
-<button onclick="startMusicAndNext()">Next →</button>
+<button onclick="next(2)">Next →</button>
 
+</div>
+
+<!-- 💭 SECTION 2 — MEMORIES -->
+<div class="section" id="s2">
+
+<div class="timeline">
+  <div>📅 The day we went on our first date we held hands and kissed for the first time</div>
+  <div>💬 First night we spent together in car holding each other</div>
+  <div>🎮 Playing Valorant side by side</div>
+  <div>❤️ The moment I knew i would be spending my life with you</div>
+</div>
+
+<button onclick="next(3)">Next →</button>
+
+</div>
+
+<!-- 🎴 SECTION 3 — CARDS -->
+<div class="section" id="s3">
+
+<div class="cards">
+  <div class="card" onclick="openPopup(0)">Our funniest moment</div>
+  <div class="card" onclick="openPopup(1)">My favorite thing about you</div>
+  <div class="card" onclick="openPopup(2)">Why you’re special to me</div>
+</div>
+
+<button onclick="next(4)">Next →</button>
+
+</div>
+
+<!-- ⏳ SECTION 4 — QUESTION -->
+<div class="section" id="s4">
+
+<h2>⏳ Countdown to Our Date ❤️</h2>
+<div id="timer"></div>
+
+<h1>Will you be my Valentine?</h1>
+
+<button onclick="yesClicked()">Yes 💖</button>
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popupContent" id="popupText"></div>
 </div>
 
 <script>
 
-const music=document.getElementById("bgMusic");
+/* 🎵 Start music on first tap */
+document.body.addEventListener("click",()=>{
+  document.getElementById("bgMusic").play();
+},{once:true});
 
-/* Restore if already playing */
-if(sessionStorage.getItem("musicTime")){
-  music.currentTime=sessionStorage.getItem("musicTime");
-  music.play();
+/* Section navigation */
+function next(n){
+
+  document.querySelector(".section.active")
+    .classList.remove("active");
+
+  document.getElementById("s"+n)
+    .classList.add("active");
 }
 
-/* Start music on first click */
-function startMusicAndNext(){
+/* Popup cards */
+const memories=[
+"Making Ashay say hard disk 😂",
+"Your sweet sweet smile ❤️",
+"You are strong, smart, beautiful, hot, freaky like me..."
+];
 
-  if(!sessionStorage.getItem("musicStarted")){
-    music.play();
-    sessionStorage.setItem("musicStarted","true");
-  }
-
-  sessionStorage.setItem("musicTime",music.currentTime);
-
-  window.location.href="memories.html?v=30";
+function openPopup(i){
+  popupText.innerText=memories[i];
+  popup.classList.add("show");
 }
 
-/* Save playback time continuously */
+popup.onclick=()=>popup.classList.remove("show");
+
+/* Countdown */
+const target=new Date("Feb 13, 2026").getTime();
+
 setInterval(()=>{
-  if(!music.paused){
-    sessionStorage.setItem("musicTime",music.currentTime);
-  }
+  const now=new Date().getTime();
+  const diff=target-now;
+
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+
+  timer.innerHTML=`${d}d ${h}h ${m}m ${s}s`;
 },1000);
+
+/* Goofy No */
+function moveNo(){
+  const btn=document.getElementById("noBtn");
+  btn.style.position="fixed";
+  btn.style.left=Math.random()*90+"vw";
+  btn.style.top=Math.random()*90+"vh";
+}
+
+/* 💖 YES SCREEN + HEARTS */
+function yesClicked(){
+
+  const love=document.createElement("div");
+  love.className="loveScreen";
+  love.innerHTML="<h1>She said YES ❤️</h1><p>I love you so much.</p>";
+  document.body.appendChild(love);
+
+  /* Hearts rain */
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+  },300);
+}
 
 </script>
 
-
 </body>
 </html>
-
