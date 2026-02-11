@@ -7,6 +7,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
 <style>
+
+/* 🌌 Same sky as memories */
 body{
   margin:0;
   height:100vh;
@@ -29,28 +31,97 @@ body{
   z-index:-2;
 }
 
+@keyframes moveStars{
+  from{background-position:0 0;}
+  to{background-position:-10000px 5000px;}
+}
+
+/* 🌠 Shooting stars */
+.shooting-star{
+  position:fixed;
+  width:2px;
+  height:100px;
+  background:linear-gradient(-45deg,white,transparent);
+  animation:shoot 6s linear infinite;
+}
+
+@keyframes shoot{
+  0%{transform:translate(0,0) rotate(45deg);opacity:1;}
+  100%{transform:translate(-1200px,1200px) rotate(45deg);opacity:0;}
+}
+
 button{
   padding:12px 24px;
-  margin:10px;
+  margin:12px;
   border:none;
   border-radius:30px;
+  font-size:16px;
 }
 
 #yesBtn{background:#0072ff;color:white;}
-#noBtn{background:#ffffff20;color:white;}
+#noBtn{background:#ffffff20;color:white;position:relative;}
+
 </style>
 </head>
 
 <body>
 
-<iframe src="music.html?v=10" style="width:0;height:0;border:0;"></iframe>
+<iframe src="music.html?v=11" style="width:0;height:0;border:0;"></iframe>
+
 <div class="stars"></div>
 
+<div class="shooting-star" style="top:20%; left:90%;"></div>
+<div class="shooting-star" style="top:70%; left:95%; animation-delay:3s;"></div>
+
 <div>
-  <h1>Will you be my Valentine?</h1>
-  <button id="yesBtn">Yes 💖</button>
-  <button id="noBtn">No 😢</button>
+
+<h2>⏳ Countdown to Our Date ❤️</h2>
+<div id="timer"></div>
+
+<h1>Will you be my Valentine?</h1>
+
+<button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+
 </div>
+
+<script>
+
+/* Countdown */
+const target=new Date("Feb 13, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=target-now;
+
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("timer").innerHTML=
+  `${d}d ${h}h ${m}m ${s}s`;
+},1000);
+
+/* Goofy No */
+function moveNo(){
+  const btn=document.getElementById("noBtn");
+  btn.style.position="fixed";
+  btn.style.left=Math.random()*90+"vw";
+  btn.style.top=Math.random()*90+"vh";
+}
+
+/* YES screen */
+function yesClicked(){
+  document.body.innerHTML=`
+    <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;">
+      <h1>She said YES ❤️</h1>
+      <p>I love you so much.</p>
+    </div>
+  `;
+}
+
+</script>
 
 </body>
 </html>
