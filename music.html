@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0">
+
+<audio id="bgMusic" autoplay loop>
+  <source src="song.mp3?v=1" type="audio/mpeg">
+</audio>
+
+<script>
+/* Ensure autoplay after interaction */
+document.body.addEventListener("click",()=>{
+  document.getElementById("bgMusic").play();
+});
+</script>
+
+</body>
+</html>
