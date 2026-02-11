@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <title>Hi Baby ❤️</title>
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-
 <style>
 body{
   margin:0;
@@ -15,12 +13,38 @@ body{
   align-items:center;
   background:#020412;
   color:white;
-  font-family:Poppins, sans-serif;
+  font-family:Poppins;
   text-align:center;
+  overflow:hidden;
 }
 
-.container{
-  max-width:700px;
+/* Stars */
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url("https://www.transparenttextures.com/patterns/stardust.png");
+  animation:moveStars 200s linear infinite;
+  z-index:-2;
+}
+
+@keyframes moveStars{
+  from{background-position:0 0;}
+  to{background-position:-10000px 5000px;}
+}
+
+/* Shooting stars */
+.shooting-star{
+  position:fixed;
+  width:2px;
+  height:80px;
+  background:linear-gradient(-45deg,white,transparent);
+  animation:shoot 3s linear infinite;
+}
+
+@keyframes shoot{
+  0%{transform:translateX(0) translateY(0) rotate(45deg);opacity:1;}
+  100%{transform:translateX(-800px) translateY(800px) rotate(45deg);opacity:0;}
 }
 
 button{
@@ -37,16 +61,23 @@ button{
 
 <body>
 
-<div class="container">
-  <h1>Hi Baby ❤️</h1>
+<!-- Persistent music -->
+<iframe src="music.html" style="width:0;height:0;border:0;"></iframe>
 
-  <p>
-  I still remember the first time we spoke properly heart to heart...<br><br>
-  Every day since then…<br><br>
-  You’ve made my life better.
-  </p>
+<div class="stars"></div>
+<div class="shooting-star" style="top:10%; left:80%;"></div>
+<div class="shooting-star" style="top:40%; left:90%; animation-delay:2s;"></div>
 
-  <button onclick="next()">Next →</button>
+<div>
+<h1>Hi Baby ❤️</h1>
+
+<p>
+I still remember the first time we spoke properly heart to heart...<br><br>
+Every day since then…<br><br>
+You’ve made my life better.
+</p>
+
+<button onclick="next()">Next →</button>
 </div>
 
 <script>
