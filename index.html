@@ -20,8 +20,8 @@ body{
   justify-content:center;
   align-items:center;
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  overflow:hidden;
   color:white;
+  overflow:hidden;
 }
 
 /* Glass Card */
@@ -77,12 +77,14 @@ p{
   background:#ffffff20;
   color:white;
   border:1px solid #ffffff40;
+  position:relative;
 }
 
-/* Player UI */
-.player{
-  margin-top:25px;
-  opacity:.9;
+/* Music Player */
+.player audio{
+  width:100%;
+  margin-top:20px;
+  filter:invert(1) brightness(1.2);
 }
 
 /* Love Screen */
@@ -120,16 +122,12 @@ p{
     <button id="noBtn" onmouseover="moveNo()">No</button>
   </div>
 
-  <!-- Visible YouTube Player -->
+  <!-- Visible Music Player -->
   <div class="player">
-    <iframe
-      width="100%"
-      height="80"
-      src="https://www.youtube.com/embed/GDND88fqt1o"
-      title="Music Player"
-      frameborder="0"
-      allow="autoplay; encrypted-media">
-    </iframe>
+    <audio id="bgMusic" controls>
+      <source src="song.mp3" type="audio/mpeg">
+      Your browser does not support audio.
+    </audio>
   </div>
 </div>
 
@@ -143,41 +141,39 @@ function yesClicked(){
       <h1>She said YES ❤️</h1>
       <p>I love you so much.</p>
 
-      <iframe width="0" height="0"
-      src="https://www.youtube.com/embed/GDND88fqt1o?autoplay=1&loop=1&playlist=GDND88fqt1o"
-      frameborder="0"
-      allow="autoplay">
-      </iframe>
+      <audio id="bgMusic" autoplay controls>
+        <source src="song.mp3" type="audio/mpeg">
+      </audio>
     </div>
   `;
+
+  setTimeout(()=>{
+    document.getElementById("bgMusic").play();
+  },300);
 }
 
-/* Moving NO button */
+/* Goofy floating NO button */
 function moveNo(){
 
-  const btn = document.getElementById("noBtn");
+  const btn=document.getElementById("noBtn");
 
-  // Screen limits
-  const maxX = window.innerWidth - btn.offsetWidth - 20;
-  const maxY = window.innerHeight - btn.offsetHeight - 20;
+  const maxX=window.innerWidth-btn.offsetWidth-20;
+  const maxY=window.innerHeight-btn.offsetHeight-20;
 
-  // Random position
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+  const x=Math.random()*maxX;
+  const y=Math.random()*maxY;
 
-  // Apply movement
-  btn.style.position = "fixed";
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
+  btn.style.position="fixed";
+  btn.style.left=x+"px";
+  btn.style.top=y+"px";
 
-  // Funny rotation
-  const rotate = Math.random() * 360;
-  btn.style.transform = `rotate(${rotate}deg)`;
+  const rotate=Math.random()*360;
+  const scale=Math.random()*0.5+0.7;
+
+  btn.style.transform=`rotate(${rotate}deg) scale(${scale})`;
 }
 
 </script>
 
 </body>
 </html>
-
-
