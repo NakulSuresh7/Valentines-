@@ -81,10 +81,15 @@ You’ve made my life better.
 </div>
 
 <script>
-function next(){
-  window.location.href="memories.html";
-}
+
+/* Tell iframe to start music */
+window.onload=()=>{
+  const iframe=document.querySelector("iframe");
+  iframe.contentWindow.postMessage("startMusic","*");
+};
+
 </script>
 
 </body>
 </html>
+
