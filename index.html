@@ -1,104 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Be My Valentine ❤️</title>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            font-family: 'Segoe UI', sans-serif;
-            text-align: center;
-            overflow: hidden;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 400px;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-        h1 {
-            color: #e63946;
-            margin-bottom: 10px;
-        }
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(270deg,#ff758c,#ff7eb3,#fad0c4);
+    background-size:600% 600%;
+    animation:gradientMove 10s ease infinite;
+    overflow:hidden;
+}
 
-        p {
-            font-size: 18px;
-            color: #333;
-        }
+/* Background animation */
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-        .buttons {
-            margin-top: 25px;
-        }
+.card{
+    background:rgba(255,255,255,0.95);
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    width:380px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    backdrop-filter:blur(10px);
+    animation:fadeIn 1.5s ease;
+}
 
-        button {
-            padding: 12px 25px;
-            font-size: 16px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: 10px;
-            transition: 0.3s;
-        }
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(40px);}
+    to{opacity:1;transform:translateY(0);}
+}
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-        }
+h1{color:#e63946;margin-bottom:15px;}
+p{font-size:18px;margin-bottom:20px;}
 
-        #yesBtn:hover {
-            background-color: #e63956;
-        }
+.buttons button{
+    padding:12px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:10px;
+    transition:.3s;
+}
 
-        #noBtn {
-            background-color: #ddd;
-        }
+#yesBtn{
+    background:#ff4d6d;
+    color:white;
+}
 
-        #noBtn:hover {
-            position: absolute;
-            top: calc(50% - 20px);
-            left: calc(50% - 50px);
-            transform: translate(
-                calc(-50% + (Math.random() * 200px)),
-                calc(-50% + (Math.random() * 200px))
-            );
-        }
+#yesBtn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 15px #ff4d6d;
+}
 
-        .hearts {
-            position: fixed;
-            font-size: 20px;
-            animation: float 5s linear infinite;
-            color: #ff4d6d;
-        }
+#noBtn{
+    background:#ddd;
+    position:relative;
+}
 
-        @keyframes float {
-            from {
-                transform: translateY(100vh);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-10vh);
-                opacity: 0;
-            }
-        }
-    </style>
+/* Floating hearts */
+.heart{
+    position:absolute;
+    color:#ff4d6d;
+    animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Confetti */
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    background:red;
+    top:-10px;
+    animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="card">
-    <h1>Hey ❤️</h1>
+    <h1>Hey My Love ❤️</h1>
+
     <p>
-        I have something special to ask you… <br><br>
-        Will you be my Valentine? 💌
+        Every moment with you is special…<br>
+        So I wanted to ask you something 💌<br><br>
+        <b>Will you be my Valentine?</b>
     </p>
 
     <div class="buttons">
@@ -107,38 +125,81 @@
     </div>
 </div>
 
+<!-- Spotify Player (Hidden until Yes click) -->
+<div id="spotifyPlayer" style="display:none;">
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/track/2psRActEWsTlYYd7EDoyVR?utm_source=generator"
+width="0"
+height="0"
+frameBorder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+</div>
+
 <script>
-    function yesClicked() {
-        document.body.innerHTML = `
-            <h1 style="color:white; font-size:50px;">
-                YAYYY ❤️<br>
-                I love you 😘
-            </h1>
-        `;
+
+/* YES CLICK */
+function yesClicked(){
+
+    /* Show love screen */
+    document.body.innerHTML=`
+        <div style="
+            display:flex;
+            height:100vh;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            color:white;
+            text-align:center;
+        ">
+            <h1 style="font-size:60px;">YAYYY ❤️</h1>
+            <p style="font-size:24px;">I love you so much 😘</p>
+        </div>
+    `;
+
+    /* Play Spotify */
+    const iframe=document.createElement("iframe");
+    iframe.src="https://open.spotify.com/embed/track/2psRActEWsTlYYd7EDoyVR?utm_source=generator&autoplay=1";
+    iframe.width="0";
+    iframe.height="0";
+    iframe.allow="autoplay";
+    document.body.appendChild(iframe);
+
+    /* Confetti burst */
+    for(let i=0;i<120;i++){
+        const conf=document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
+        conf.style.animationDuration=(Math.random()*2+2)+"s";
+        document.body.appendChild(conf);
+
+        setTimeout(()=>conf.remove(),3000);
     }
+}
 
-    function moveNo() {
-        const btn = document.getElementById("noBtn");
-        const x = Math.random() * window.innerWidth - 100;
-        const y = Math.random() * window.innerHeight - 50;
-        btn.style.position = "absolute";
-        btn.style.left = x + "px";
-        btn.style.top = y + "px";
-    }
+/* Moving NO button */
+function moveNo(){
+    const btn=document.getElementById("noBtn");
+    const x=Math.random()*(window.innerWidth-100);
+    const y=Math.random()*(window.innerHeight-50);
+    btn.style.position="absolute";
+    btn.style.left=x+"px";
+    btn.style.top=y+"px";
+}
 
-    // Floating hearts
-    setInterval(() => {
-        const heart = document.createElement("div");
-        heart.classList.add("hearts");
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = Math.random() * 20 + 10 + "px";
-        document.body.appendChild(heart);
+/* Floating hearts loop */
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
-    }, 300);
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
 </script>
 
 </body>
