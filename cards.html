@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#020412;
+  color:white;
+  font-family:Poppins;
+}
+
+.cards{
+  display:flex;
+  gap:20px;
+}
+
+.card{
+  padding:20px;
+  background:#ffffff10;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.popup{
+  position:fixed;
+  inset:0;
+  background:#000000cc;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  visibility:hidden;
+}
+
+.popup.show{visibility:visible;}
+
+.popupContent{
+  background:#111;
+  padding:30px;
+  border-radius:12px;
+}
+
+button{
+  margin-top:30px;
+  padding:12px 24px;
+  border:none;
+  border-radius:30px;
+  background:#0072ff;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div>
+  <div class="cards">
+    <div class="card" onclick="openPopup(0)">Our funniest moment</div>
+    <div class="card" onclick="openPopup(1)">My favorite thing about you</div>
+    <div class="card" onclick="openPopup(2)">Why you’re special to me</div>
+  </div>
+
+  <button onclick="next()">Next →</button>
+</div>
+
+<div class="popup" id="popup">
+  <div class="popupContent" id="popupText"></div>
+</div>
+
+<script>
+const memories=[
+"Making Ashay say hard disk 😂",
+"Your sweet sweet smile ❤️",
+"You are strong, smart, beautiful, hot, freaky like me, has the same humor as me, my bestfriend, the one I can trust with anything."
+];
+
+function openPopup(i){
+  document.getElementById("popupText").innerText=memories[i];
+  document.getElementById("popup").classList.add("show");
+}
+
+document.getElementById("popup").onclick=()=>{
+  document.getElementById("popup").classList.remove("show");
+};
+
+function next(){
+  window.location.href="final.html";
+}
+</script>
+
+</body>
+</html>

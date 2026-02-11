@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Question ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#020412;
+  color:white;
+  font-family:Poppins;
+  text-align:center;
+}
+
+button{
+  padding:12px 24px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+#yesBtn{
+  background:#0072ff;
+  color:white;
+}
+
+#noBtn{
+  background:#ffffff20;
+  color:white;
+  position:relative;
+}
+</style>
+</head>
+
+<body>
+
+<div>
+  <h2>⏳ Countdown to Our Date ❤️</h2>
+  <div id="timer"></div>
+
+  <h1>Will you be my Valentine?</h1>
+
+  <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+  <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+</div>
+
+<script>
+
+/* Countdown */
+const target=new Date("Feb 13, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=target-now;
+
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("timer").innerHTML=
+  `${d}d ${h}h ${m}m ${s}s`;
+},1000);
+
+/* Yes click */
+function yesClicked(){
+  document.body.innerHTML=`
+    <h1>She said YES ❤️</h1>
+    <audio autoplay controls>
+      <source src="song.mp3">
+    </audio>
+  `;
+}
+
+/* Goofy No */
+function moveNo(){
+  const btn=document.getElementById("noBtn");
+  btn.style.position="fixed";
+  btn.style.left=Math.random()*90+"vw";
+  btn.style.top=Math.random()*90+"vh";
+}
+
+</script>
+
+</body>
+</html>
