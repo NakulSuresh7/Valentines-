@@ -4,10 +4,7 @@
 <meta charset="UTF-8">
 <title>Hi Baby ❤️</title>
 
-<!-- 🚫 Anti-cache -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 
 <style>
 
@@ -67,9 +64,9 @@ button{
 
 <body>
 
-<!-- 🎵 Music iframe (cache busted) -->
+<!-- 🎵 Music iframe -->
 <iframe id="musicFrame"
-src="music.html?v=10"
+src="music.html?v=20"
 style="width:0;height:0;border:0;"></iframe>
 
 <div class="stars"></div>
@@ -93,7 +90,7 @@ You’ve made my life better.
 
 <script>
 
-/* Start music */
+/* Start music only once */
 function startMusicAndNext(){
 
   const iframe=document.getElementById("musicFrame");
@@ -103,13 +100,7 @@ function startMusicAndNext(){
   window.location.href="memories.html?v=20";
 }
 
-/* Force reload if cached */
-if (performance.navigation.type === 1) {
-  location.reload(true);
-}
-
 </script>
 
 </body>
 </html>
-
