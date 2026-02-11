@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>For You ❤️</title>
 
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+
 <style>
 body{
   margin:0;
@@ -17,7 +19,6 @@ body{
   overflow:hidden;
 }
 
-/* SAME SKY */
 .stars{
   position:fixed;
   width:100%;
@@ -27,12 +28,6 @@ body{
   z-index:-2;
 }
 
-@keyframes moveStars{
-  from{background-position:0 0;}
-  to{background-position:-10000px 5000px;}
-}
-
-/* Cards animation */
 .cards{
   display:flex;
   gap:20px;
@@ -52,7 +47,6 @@ body{
   box-shadow:0 0 25px #00c6ff66;
 }
 
-/* Popup */
 .popup{
   position:fixed;
   inset:0;
@@ -69,19 +63,13 @@ body{
   background:#111;
   padding:30px;
   border-radius:16px;
-  animation:zoom .4s ease;
-}
-
-@keyframes zoom{
-  from{transform:scale(.7);opacity:0;}
-  to{transform:scale(1);opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
-<iframe src="music.html" style="width:0;height:0;border:0;"></iframe>
+<iframe src="music.html?v=10" style="width:0;height:0;border:0;"></iframe>
 <div class="stars"></div>
 
 <div>
@@ -102,7 +90,7 @@ body{
 const memories=[
 "Making Ashay say hard disk 😂",
 "Your sweet sweet smile ❤️",
-"You are strong, smart, beautiful, hot, freaky like me, has the same humor as me, my bestfriend, the one I can trust with anything."
+"You are strong, smart, beautiful, hot, freaky like me..."
 ];
 
 function openPopup(i){
@@ -115,7 +103,7 @@ document.getElementById("popup").onclick=()=>{
 };
 
 function next(){
-  window.location.href="final.html";
+  window.location.href="final.html?v=10";
 }
 </script>
 
