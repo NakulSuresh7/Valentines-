@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <title>My Question ❤️</title>
 
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <style>
+
+/* 🌌 Base sky */
 body{
   margin:0;
   height:100vh;
@@ -18,6 +24,7 @@ body{
   overflow:hidden;
 }
 
+/* ⭐ Moving stars (same as memories) */
 .stars{
   position:fixed;
   width:100%;
@@ -27,28 +34,125 @@ body{
   z-index:-2;
 }
 
-button{
-  padding:12px 24px;
-  margin:10px;
-  border:none;
-  border-radius:30px;
+@keyframes moveStars{
+  from{background-position:0 0;}
+  to{background-position:-10000px 5000px;}
 }
 
-#yesBtn{background:#0072ff;color:white;}
-#noBtn{background:#ffffff20;color:white;position:relative;}
+/* 🌠 Shooting stars */
+.shooting-star{
+  position:fixed;
+  width:2px;
+  height:100px;
+  background:linear-gradient(-45deg,white,transparent);
+  animation:shoot 6s linear infinite;
+}
+
+@keyframes shoot{
+  0%{
+    transform:translate(0,0) rotate(45deg);
+    opacity:1;
+  }
+  100%{
+    transform:translate(-1200px,1200px) rotate(45deg);
+    opacity:0;
+  }
+}
+
+/* Buttons */
+button{
+  padding:12px 24px;
+  margin:12px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+#yesBtn{
+  background:#0072ff;
+  color:white;
+}
+
+#noBtn{
+  background:#ffffff20;
+  color:white;
+  position:relative;
+}
+
+#noBtn:hover{
+  transform:scale(1.05);
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- 🎵 Persistent music -->
 <iframe src="music.html" style="width:0;height:0;border:0;"></iframe>
+
+<!-- 🌌 Star layers -->
 <div class="stars"></div>
 
+<!-- 🌠 Shooting stars -->
+<div class="shooting-star" style="top:15%; left:90%;"></div>
+<div class="shooting-star" style="top:40%; left:95%; animation-delay:2s;"></div>
+<div class="shooting-star" style="top:70%; left:88%; animation-delay:4s;"></div>
+
 <div>
+
+  <h2>⏳ Countdown to Our Date ❤️</h2>
+  <div id="timer"></div>
+
   <h1>Will you be my Valentine?</h1>
-  <button id="yesBtn">Yes 💖</button>
-  <button id="noBtn">No 😢</button>
+
+  <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+  <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+
 </div>
+
+<script>
+
+/* Countdown */
+const target=new Date("Feb 13, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=target-now;
+
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("timer").innerHTML=
+  `${d}d ${h}h ${m}m ${s}s`;
+},1000);
+
+/* Goofy No button */
+function moveNo(){
+  const btn=document.getElementById("noBtn");
+
+  const x=Math.random()*(window.innerWidth-100);
+  const y=Math.random()*(window.innerHeight-50);
+
+  btn.style.position="fixed";
+  btn.style.left=x+"px";
+  btn.style.top=y+"px";
+}
+
+/* Yes click */
+function yesClicked(){
+  document.body.innerHTML=`
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;">
+      <h1>She said YES ❤️</h1>
+      <p>I love you so much.</p>
+    </div>
+  `;
+}
+
+</script>
 
 </body>
 </html>
