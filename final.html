@@ -11,7 +11,7 @@
 
 <style>
 
-/* 🌌 Sky base */
+/* 🌌 Base sky */
 body{
   margin:0;
   height:100vh;
@@ -71,10 +71,18 @@ button{
   cursor:pointer;
 }
 
-#yesBtn{background:#0072ff;color:white;}
-#noBtn{background:#ffffff20;color:white;position:relative;}
+#yesBtn{
+  background:#0072ff;
+  color:white;
+}
 
-/* 💖 Love screen overlay */
+#noBtn{
+  background:#ffffff20;
+  color:white;
+  position:relative;
+}
+
+/* 💖 Love overlay screen */
 .loveScreen{
   position:fixed;
   inset:0;
@@ -82,7 +90,6 @@ button{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:transparent;
   animation:fadeIn 2s ease;
 }
 
@@ -101,17 +108,18 @@ button{
 
 <body>
 
-<!-- 🎵 Music iframe -->
-<iframe src="music.html?v=12" style="width:0;height:0;border:0;"></iframe>
+<!-- 🎵 Music iframe (cache busted) -->
+<iframe src="music.html?v=13"
+style="width:0;height:0;border:0;"></iframe>
 
-<!-- 🌌 Star background -->
+<!-- 🌌 Star layers -->
 <div class="stars"></div>
 
 <!-- 🌠 Shooting stars -->
 <div class="shooting-star" style="top:20%; left:90%;"></div>
 <div class="shooting-star" style="top:60%; left:95%; animation-delay:3s;"></div>
 
-<!-- 💌 Question container -->
+<!-- 💌 MAIN QUESTION CONTENT -->
 <div id="mainContent">
 
   <h2>⏳ Countdown to Our Date ❤️</h2>
@@ -126,7 +134,7 @@ button{
 
 <script>
 
-/* Countdown */
+/* ⏳ Countdown */
 const target=new Date("Feb 13, 2026 00:00:00").getTime();
 
 setInterval(()=>{
@@ -140,19 +148,26 @@ setInterval(()=>{
 
   document.getElementById("timer").innerHTML=
   `${d}d ${h}h ${m}m ${s}s`;
+
 },1000);
 
-/* Goofy No */
+/* 🟦 Goofy NO button */
 function moveNo(){
+
   const btn=document.getElementById("noBtn");
+
   btn.style.position="fixed";
   btn.style.left=Math.random()*90+"vw";
   btn.style.top=Math.random()*90+"vh";
 }
 
-/* 💖 YES CLICK — overlay instead of replace */
+/* 💖 YES CLICK FIX */
 function yesClicked(){
 
+  /* Hide original content */
+  document.getElementById("mainContent").style.display="none";
+
+  /* Create love overlay */
   const loveDiv=document.createElement("div");
 
   loveDiv.className="loveScreen";
@@ -163,6 +178,11 @@ function yesClicked(){
   `;
 
   document.body.appendChild(loveDiv);
+}
+
+/* 🔄 Force reload if cached */
+if (performance.navigation.type === 1) {
+  location.reload(true);
 }
 
 </script>
