@@ -3,22 +3,21 @@
 <body style="margin:0">
 
 <audio id="bgMusic" loop>
-  <source src="song.mp3?v=2" type="audio/mpeg">
+  <source src="song.mp3?v=3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* Play only once per session */
-if(!sessionStorage.getItem("musicPlaying")){
-  const music=document.getElementById("bgMusic");
-  music.play();
-  sessionStorage.setItem("musicPlaying","true");
+/* Start music only once */
+if(!sessionStorage.getItem("musicStarted")){
+  window.addEventListener("message",(e)=>{
+    if(e.data==="startMusic"){
+      const music=document.getElementById("bgMusic");
+      music.play();
+      sessionStorage.setItem("musicStarted","true");
+    }
+  });
 }
-
-/* Resume if paused after interaction */
-document.body.addEventListener("click",()=>{
-  document.getElementById("bgMusic").play();
-});
 
 </script>
 
