@@ -256,7 +256,7 @@ function next(n){
 const memories=[
 "Making Ashay say hard disk 😂",
 "Your sweet sweet smile ❤️",
-"You are strong, smart, beautiful, hot, freaky like me, My bestestfriend, One i can trust with anything and there arent enough words to describe why you are special to me ❤️❤️❤️"
+"You are strong, smart, beautiful, hot, freaky like me..."
 ];
 
 function openPopup(i){
@@ -281,7 +281,7 @@ setInterval(()=>{
   timer.innerHTML=`${d}d ${h}h ${m}m ${s}s`;
 },1000);
 
-/* Goofy No */
+/* Goofy No button */
 function moveNo(){
   const btn=document.getElementById("noBtn");
   btn.style.position="fixed";
@@ -289,27 +289,45 @@ function moveNo(){
   btn.style.top=Math.random()*90+"vh";
 }
 
-/* 💖 YES SCREEN + HEARTS */
+/* 💖 YES CLICK FIXED */
 function yesClicked(){
 
+  /* Hide question section */
+  document.getElementById("s4").style.display="none";
+
+  /* Create love screen */
   const love=document.createElement("div");
   love.className="loveScreen";
-  love.innerHTML="<h1>She said YES ❤️</h1><p>I love you so much.</p>";
+  love.innerHTML=`
+    <h1>She said YES ❤️</h1>
+    <p>I love you so much.</p>
+  `;
   document.body.appendChild(love);
 
-  /* Hearts rain */
+  /* Start hearts rain ONLY now */
+  startHearts();
+}
+
+/* 💕 Hearts animation */
+function startHearts(){
+
   setInterval(()=>{
+
     const heart=document.createElement("div");
     heart.className="heart";
     heart.innerHTML="💖";
     heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+16)+"px";
+
     document.body.appendChild(heart);
+
     setTimeout(()=>heart.remove(),4000);
+
   },300);
 }
 
 </script>
-
 </body>
 </html>
+
 
