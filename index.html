@@ -2,107 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Be My Valentine ❤️</title>
+<title>For You ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
 body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(270deg,#ff758c,#ff7eb3,#fad0c4);
-    background-size:600% 600%;
-    animation:gradientMove 10s ease infinite;
-    overflow:hidden;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  overflow:hidden;
+  color:white;
 }
 
-/* Background animation */
-@keyframes gradientMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
+/* Glass Card */
 .card{
-    background:rgba(255,255,255,0.95);
-    padding:40px;
-    border-radius:25px;
-    text-align:center;
-    width:380px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.25);
-    backdrop-filter:blur(10px);
-    animation:fadeIn 1.5s ease;
+  background:rgba(255,255,255,0.08);
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  width:420px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 0 40px rgba(0,0,0,0.6);
+  animation:fadeIn 1.5s ease;
 }
 
 @keyframes fadeIn{
-    from{opacity:0;transform:translateY(40px);}
-    to{opacity:1;transform:translateY(0);}
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-h1{color:#e63946;margin-bottom:15px;}
-p{font-size:18px;margin-bottom:20px;}
+h1{
+  font-weight:600;
+  margin-bottom:15px;
+}
 
+p{
+  font-weight:300;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+/* Buttons */
 .buttons button{
-    padding:12px 25px;
-    font-size:16px;
-    border:none;
-    border-radius:30px;
-    cursor:pointer;
-    margin:10px;
-    transition:.3s;
+  padding:12px 26px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:15px;
+  transition:.3s;
 }
 
 #yesBtn{
-    background:#ff4d6d;
-    color:white;
+  background:linear-gradient(90deg,#00c6ff,#0072ff);
+  color:white;
 }
 
 #yesBtn:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 15px #ff4d6d;
+  transform:scale(1.08);
+  box-shadow:0 0 20px #00c6ff;
 }
 
 #noBtn{
-    background:#ddd;
-    position:relative;
+  background:#ffffff20;
+  color:white;
+  border:1px solid #ffffff40;
 }
 
-/* Floating hearts */
-.heart{
-    position:absolute;
-    color:#ff4d6d;
-    animation:floatUp 6s linear infinite;
+/* Player UI */
+.player{
+  margin-top:25px;
+  opacity:.9;
 }
 
-@keyframes floatUp{
-    from{transform:translateY(100vh);opacity:1;}
-    to{transform:translateY(-10vh);opacity:0;}
+/* Love Screen */
+.loveScreen{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  animation:fadeIn 1.5s ease;
 }
 
-/* Confetti */
-.confetti{
-    position:fixed;
-    width:10px;
-    height:10px;
-    background:red;
-    top:-10px;
-    animation:fall 3s linear forwards;
-}
-
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(720deg);
-        opacity:0;
-    }
+.loveScreen h1{
+  font-size:60px;
+  margin-bottom:10px;
 }
 
 </style>
@@ -111,29 +107,30 @@ p{font-size:18px;margin-bottom:20px;}
 <body>
 
 <div class="card">
-    <h1>Hey My Love ❤️</h1>
+  <h1>Hey ❤️</h1>
 
-    <p>
-        Every moment with you is special…<br>
-        So I wanted to ask you something 💌<br><br>
-        <b>Will you be my Valentine?</b>
-    </p>
+  <p>
+    I’ve been meaning to ask you something…<br>
+    And I wanted this moment to be special.<br><br>
+    Will you be my Valentine?
+  </p>
 
-    <div class="buttons">
-        <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-        <button id="noBtn" onmouseover="moveNo()">No 😢</button>
-    </div>
-</div>
+  <div class="buttons">
+    <button id="yesBtn" onclick="yesClicked()">Yes</button>
+    <button id="noBtn" onmouseover="moveNo()">No</button>
+  </div>
 
-<!-- Spotify Player (Hidden until Yes click) -->
-<div id="spotifyPlayer" style="display:none;">
-<iframe style="border-radius:12px"
-src="https://open.spotify.com/embed/track/2psRActEWsTlYYd7EDoyVR?utm_source=generator"
-width="0"
-height="0"
-frameBorder="0"
-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-</iframe>
+  <!-- Visible YouTube Player -->
+  <div class="player">
+    <iframe
+      width="100%"
+      height="80"
+      src="https://www.youtube.com/embed/GDND88fqt1o"
+      title="Music Player"
+      frameborder="0"
+      allow="autoplay; encrypted-media">
+    </iframe>
+  </div>
 </div>
 
 <script>
@@ -141,64 +138,29 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 /* YES CLICK */
 function yesClicked(){
 
-    /* Show love screen */
-    document.body.innerHTML=`
-        <div style="
-            display:flex;
-            height:100vh;
-            justify-content:center;
-            align-items:center;
-            flex-direction:column;
-            color:white;
-            text-align:center;
-        ">
-            <h1 style="font-size:60px;">YAYYY ❤️</h1>
-            <p style="font-size:24px;">I love you so much 😘</p>
-        </div>
-    `;
+  document.body.innerHTML=`
+    <div class="loveScreen">
+      <h1>She said YES ❤️</h1>
+      <p>I love you so much.</p>
 
-    /* Play Spotify */
-    const iframe=document.createElement("iframe");
-    iframe.src="https://open.spotify.com/embed/track/2psRActEWsTlYYd7EDoyVR?utm_source=generator&autoplay=1";
-    iframe.width="0";
-    iframe.height="0";
-    iframe.allow="autoplay";
-    document.body.appendChild(iframe);
-
-    /* Confetti burst */
-    for(let i=0;i<120;i++){
-        const conf=document.createElement("div");
-        conf.classList.add("confetti");
-        conf.style.left=Math.random()*100+"vw";
-        conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
-        conf.style.animationDuration=(Math.random()*2+2)+"s";
-        document.body.appendChild(conf);
-
-        setTimeout(()=>conf.remove(),3000);
-    }
+      <iframe width="0" height="0"
+      src="https://www.youtube.com/embed/GDND88fqt1o?autoplay=1&loop=1&playlist=GDND88fqt1o"
+      frameborder="0"
+      allow="autoplay">
+      </iframe>
+    </div>
+  `;
 }
 
 /* Moving NO button */
 function moveNo(){
-    const btn=document.getElementById("noBtn");
-    const x=Math.random()*(window.innerWidth-100);
-    const y=Math.random()*(window.innerHeight-50);
-    btn.style.position="absolute";
-    btn.style.left=x+"px";
-    btn.style.top=y+"px";
+  const btn=document.getElementById("noBtn");
+  const x=Math.random()*(window.innerWidth-100);
+  const y=Math.random()*(window.innerHeight-50);
+  btn.style.position="absolute";
+  btn.style.left=x+"px";
+  btn.style.top=y+"px";
 }
-
-/* Floating hearts loop */
-setInterval(()=>{
-    const heart=document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+15)+"px";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>heart.remove(),6000);
-},300);
 
 </script>
 
