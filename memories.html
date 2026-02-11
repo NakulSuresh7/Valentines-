@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <title>Our Memories ❤️</title>
 
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <style>
 body{
   margin:0;
@@ -31,27 +35,12 @@ body{
   to{background-position:-10000px 5000px;}
 }
 
-/* Shooting stars */
-.shooting-star{
-  position:fixed;
-  width:2px;
-  height:90px;
-  background:linear-gradient(-45deg,white,transparent);
-  animation:shoot 6s linear infinite;
-}
-
-@keyframes shoot{
-  0%{transform:translate(0,0) rotate(45deg);opacity:1;}
-  100%{transform:translate(-1200px,1200px) rotate(45deg);opacity:0;}
-}
-
 .timeline div{
   margin:20px 0;
   padding:18px;
   background:#ffffff10;
   border-radius:14px;
   transition:.3s;
-  cursor:pointer;
 }
 
 .timeline div:hover{
@@ -59,16 +48,22 @@ body{
   background:#ffffff25;
   box-shadow:0 0 20px #00c6ff55;
 }
+
+button{
+  margin-top:30px;
+  padding:12px 24px;
+  border:none;
+  border-radius:30px;
+  background:#0072ff;
+  color:white;
+}
 </style>
 </head>
 
 <body>
 
-<iframe src="music.html" style="width:0;height:0;border:0;"></iframe>
+<iframe src="music.html?v=10" style="width:0;height:0;border:0;"></iframe>
 <div class="stars"></div>
-
-<div class="shooting-star" style="top:20%; left:90%;"></div>
-<div class="shooting-star" style="top:70%; left:95%; animation-delay:3s;"></div>
 
 <div class="timeline">
   <div>📅 The day we went on our first date we held hands and kissed for the first time</div>
@@ -81,7 +76,7 @@ body{
 
 <script>
 function next(){
-  window.location.href="cards.html";
+  window.location.href="cards.html?v=10";
 }
 </script>
 
