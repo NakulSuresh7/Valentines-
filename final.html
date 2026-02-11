@@ -25,20 +25,14 @@ button{
   cursor:pointer;
 }
 
-#yesBtn{
-  background:#0072ff;
-  color:white;
-}
-
-#noBtn{
-  background:#ffffff20;
-  color:white;
-  position:relative;
-}
+#yesBtn{background:#0072ff;color:white;}
+#noBtn{background:#ffffff20;color:white;position:relative;}
 </style>
 </head>
 
 <body>
+
+<iframe src="music.html" style="width:0;height:0;border:0;"></iframe>
 
 <div>
   <h2>⏳ Countdown to Our Date ❤️</h2>
@@ -51,8 +45,6 @@ button{
 </div>
 
 <script>
-
-/* Countdown */
 const target=new Date("Feb 13, 2026 00:00:00").getTime();
 
 setInterval(()=>{
@@ -68,24 +60,18 @@ setInterval(()=>{
   `${d}d ${h}h ${m}m ${s}s`;
 },1000);
 
-/* Yes click */
 function yesClicked(){
   document.body.innerHTML=`
     <h1>She said YES ❤️</h1>
-    <audio autoplay controls>
-      <source src="song.mp3">
-    </audio>
   `;
 }
 
-/* Goofy No */
 function moveNo(){
   const btn=document.getElementById("noBtn");
   btn.style.position="fixed";
   btn.style.left=Math.random()*90+"vw";
   btn.style.top=Math.random()*90+"vh";
 }
-
 </script>
 
 </body>
