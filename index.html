@@ -15,52 +15,115 @@
 }
 
 body{
-  height:100vh;
+  background:#020412;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* ⭐ Starry background */
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url("https://www.transparenttextures.com/patterns/stardust.png");
+  animation:moveStars 120s linear infinite;
+  z-index:-1;
+}
+
+@keyframes moveStars{
+  from{background-position:0 0;}
+  to{background-position:-10000px 5000px;}
+}
+
+/* Center container */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:60px 20px;
+  text-align:center;
+}
+
+/* Typing text */
+.typing{
+  font-size:22px;
+  min-height:120px;
+  line-height:1.6;
+}
+
+/* Timeline */
+.timeline{
+  margin-top:50px;
+  text-align:left;
+}
+
+.timeline div{
+  margin:15px 0;
+  padding:12px 18px;
+  background:#ffffff10;
+  border-radius:12px;
+}
+
+/* Memory cards */
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+  margin-top:50px;
+}
+
+.card{
+  width:220px;
+  padding:20px;
+  background:#ffffff10;
+  border-radius:16px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.card:hover{
+  transform:scale(1.05);
+  background:#ffffff20;
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  inset:0;
+  background:#000000cc;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:white;
-  overflow:hidden;
+  visibility:hidden;
 }
 
-/* Glass Card */
-.card{
-  background:rgba(255,255,255,0.08);
-  padding:40px;
-  border-radius:20px;
-  text-align:center;
-  width:420px;
-  backdrop-filter:blur(20px);
-  box-shadow:0 0 40px rgba(0,0,0,0.6);
-  animation:fadeIn 1.5s ease;
+.popupContent{
+  background:#111;
+  padding:30px;
+  border-radius:16px;
+  max-width:400px;
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(40px);}
-  to{opacity:1;transform:translateY(0);}
+.popup.show{visibility:visible;}
+
+/* Countdown */
+.countdown{
+  margin-top:60px;
+  font-size:22px;
 }
 
-h1{
-  font-weight:600;
-  margin-bottom:15px;
+/* Question */
+.question{
+  margin-top:70px;
 }
 
-p{
-  font-weight:300;
-  line-height:1.6;
-  margin-bottom:25px;
-}
-
-/* Buttons */
-.buttons button{
+button{
   padding:12px 26px;
   margin:10px;
   border:none;
   border-radius:30px;
   cursor:pointer;
   font-size:15px;
-  transition:.3s;
 }
 
 #yesBtn{
@@ -68,39 +131,19 @@ p{
   color:white;
 }
 
-#yesBtn:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 20px #00c6ff;
-}
-
 #noBtn{
   background:#ffffff20;
   color:white;
-  border:1px solid #ffffff40;
   position:relative;
 }
 
-/* Music Player */
-.player audio{
-  width:100%;
-  margin-top:20px;
-  filter:invert(1) brightness(1.2);
-}
-
-/* Love Screen */
+/* Love screen */
 .loveScreen{
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  text-align:center;
-  animation:fadeIn 1.5s ease;
-}
-
-.loveScreen h1{
-  font-size:60px;
-  margin-bottom:10px;
 }
 
 </style>
@@ -108,69 +151,128 @@ p{
 
 <body>
 
-<div class="card">
-  <h1>Hey ❤️</h1>
+<div class="stars"></div>
 
-  <p>
-    I’ve been meaning to ask you something…<br>
-    And I wanted this moment to be special.<br><br>
-    Will you be my Valentine?
-  </p>
+<div class="container">
 
-  <div class="buttons">
-    <button id="yesBtn" onclick="yesClicked()">Yes</button>
-    <button id="noBtn" onmouseover="moveNo()">No</button>
+  <!-- Typing intro -->
+  <div class="typing" id="typingText"></div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div>📅 The day we went on our first date we held hands and kissed for the first time</div>
+    <div>💬 First night we spent together in car holding each other</div>
+    <div>🎮 Playing Valorant side by side</div>
+    <div>❤️ The moment I knew i would be spending my life with you</div>
   </div>
 
-  <!-- Visible Music Player -->
-  <div class="player">
-    <audio id="bgMusic" controls>
-      <source src="song.mp3" type="audio/mpeg">
-      Your browser does not support audio.
-    </audio>
+  <!-- Memory cards -->
+  <div class="cards">
+    <div class="card" onclick="openPopup(0)">Our funniest moment</div>
+    <div class="card" onclick="openPopup(1)">My favorite thing about you</div>
+    <div class="card" onclick="openPopup(2)">Why you’re special to me</div>
   </div>
+
+  <!-- Countdown -->
+  <div class="countdown">
+    ⏳ Countdown to Our Date ❤️  
+    <div id="timer"></div>
+  </div>
+
+  <!-- Final question -->
+  <div class="question">
+    <h2>Will you be my Valentine?</h2>
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+  </div>
+
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popupContent" id="popupText"></div>
 </div>
 
 <script>
 
-/* YES CLICK */
-function yesClicked(){
+/* Typing text */
+const lines=[
+"I still remember the first time we spoke properly heart to heart...",
+"Every day since then…",
+"You’ve made my life better.",
+"So I wanted to ask you…"
+];
 
+let i=0,j=0;
+function type(){
+  if(i<lines.length){
+    if(j<lines[i].length){
+      document.getElementById("typingText").innerHTML+=lines[i][j];
+      j++;
+      setTimeout(type,40);
+    }else{
+      document.getElementById("typingText").innerHTML+="<br><br>";
+      i++;j=0;
+      setTimeout(type,800);
+    }
+  }
+}
+type();
+
+/* Popup memories */
+const memories=[
+"Making Ashay say hard disk 😂",
+"Your sweet sweet smile ❤️",
+"You are strong, smart, beautiful, hot, freaky like me, has the same humor as me, my bestfriend, the one I can trust with anything and words arent enough to describe how special you are to me."
+];
+
+function openPopup(i){
+  document.getElementById("popupText").innerText=memories[i];
+  document.getElementById("popup").classList.add("show");
+}
+
+document.getElementById("popup").onclick=()=>{
+  document.getElementById("popup").classList.remove("show");
+};
+
+/* Countdown to 13 Feb */
+const target=new Date("Feb 13, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=target-now;
+
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("timer").innerHTML=
+  `${d}d ${h}h ${m}m ${s}s`;
+},1000);
+
+/* Yes click */
+function yesClicked(){
   document.body.innerHTML=`
     <div class="loveScreen">
       <h1>She said YES ❤️</h1>
       <p>I love you so much.</p>
 
-      <audio id="bgMusic" autoplay controls>
+      <audio autoplay controls>
         <source src="song.mp3" type="audio/mpeg">
       </audio>
     </div>
   `;
-
-  setTimeout(()=>{
-    document.getElementById("bgMusic").play();
-  },300);
 }
 
-/* Goofy floating NO button */
+/* Goofy No button */
 function moveNo(){
-
   const btn=document.getElementById("noBtn");
-
-  const maxX=window.innerWidth-btn.offsetWidth-20;
-  const maxY=window.innerHeight-btn.offsetHeight-20;
-
-  const x=Math.random()*maxX;
-  const y=Math.random()*maxY;
-
+  const x=Math.random()*(window.innerWidth-100);
+  const y=Math.random()*(window.innerHeight-50);
   btn.style.position="fixed";
   btn.style.left=x+"px";
   btn.style.top=y+"px";
-
-  const rotate=Math.random()*360;
-  const scale=Math.random()*0.5+0.7;
-
-  btn.style.transform=`rotate(${rotate}deg) scale(${scale})`;
 }
 
 </script>
